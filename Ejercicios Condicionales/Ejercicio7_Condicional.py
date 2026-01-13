@@ -12,5 +12,5 @@ else: # Si alguna de las dos condiciones no se cumple
     print ("Usted no debe tributar (Gobierno triste 💔)") # Imprime un mensaje si alguna de las dos condiciones no se cumple
 
 # Realizado por: Jorge Carrasco Arnaz
-# Fecha: 13/01/2026 
+# Fecha: 13/01/2026
 # Hora: 10:34
