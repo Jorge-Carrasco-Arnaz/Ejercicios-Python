@@ -53,7 +53,7 @@ while True: # Mantiene el bucle siempre activo hasta que se encuentre con un bre
     borrar_pantalla() # Llama a la función para limpiar la terminal
 
     # Imprime el menú de opciones
-    print("=== AGENDA ===")
+    print("=== MENÚ ===")
     print("1. Mostrar contactos")
     print("2. Agregar contacto")
     print("3. Buscar contacto")
@@ -98,4 +98,4 @@ while True: # Mantiene el bucle siempre activo hasta que se encuentre con un bre
 
 # Realizado por: Jorge Carrasco Arnaz
 # Fecha: 21/01/2026
-# Hora: 12:03
+# Hora: 12:17
