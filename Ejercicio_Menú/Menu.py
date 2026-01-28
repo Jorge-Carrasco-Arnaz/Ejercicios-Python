@@ -1,9 +1,41 @@
+# Descripción: Crear un menú con opciones para mostrar, agregar, buscar y eliminar contactos. 
+# Y guardar los cambios en un fichero.
+# Entrada: Un menú con opciones para mostrar, agregar, buscar y eliminar contactos.
+# Salida: Un menú con opciones para mostrar, agregar, buscar y eliminar contactos.
+
 import os # Importamos la librería "os" para poder limpiar la terminal cada vez que reiniciamos el menú
+
+def cargar_datos(): # Función para cargar inicialmente los datos desde un fichero (Ampliación)
+    agenda_aux = {} # Diccionario temporal para almacenar los contactos leídos
+    
+    # Comprobamos si el archivo existe en la carpeta del programa
+    if not os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "agenda.txt")): 
+        # Si no existe, lo creamos vacío para evitar errores en la carga
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "agenda.txt"), "w"): 
+            pass # Solo lo creamos y cerramos inmediatamente
+        
+    
+    # Abrimos el archivo para leer los contactos
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "agenda.txt"), "r") as f: 
+        for linea in f: # Recorre cada línea del fichero
+            if "," in linea: # Verifica que la línea contenga el separador
+                nombre, telefono = linea.strip().split(",") # Separa el nombre y el teléfono y eliminar los espacios en blanco (strip)
+                agenda_aux[nombre] = telefono # Añade el contacto al diccionario temporal
+                
+    return agenda_aux # Devuelve el diccionario con los datos cargados o vacío si el archivo es nuevo
+
+def guardar_datos(): # Función para que cualquier cambio de agregar o eliminar se aplique al fichero (Ampliación)
+    with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "agenda.txt"), "w") as f: # Abre el fichero en modo escritura (sobrescribe con los datos actuales)
+        for nombre, telefono in agenda.items(): # Recorre el diccionario de la agenda
+            f.write(nombre + "," + telefono + "\n") # Escribe el nombre y teléfono separados por coma
+
 
 def borrar_pantalla(): # Función para limpiar la pantalla tras cada opción
     os.system("clear") # Limpia la pantalla introduciendo el comando "clear" en el terminal
 
 def mostrar_contactos(): # Función para mostrar los contactos
+    if not agenda: # Comprueba si la agenda está vacía
+        print("La agenda está vacía.") # Informa al usuario
     for nombre, telefono in agenda.items(): # Recorre el diccionario "agenda" y muestra los contactos
         print(nombre,":", telefono) # Imprime el nombre y teléfono 
 
@@ -16,6 +48,7 @@ def agregar_contacto(): # Función para agregar contactos
     else: # Si el nombre del contacto no está en la agenda
         telefono = input("Teléfono: ")  # Pide al usuario introducir el Teléfono del contacto que quiere añadir
         agenda[nombre] = telefono # Establece que el teléfono pertenece al nombre del contacto
+        guardar_datos() # Llama a la función para guardar el cambio en el fichero (Ampliación)
         print("El contatcto:",nombre, "se ha añadido a la agenda.") # Imprime un mensaje de que se ha añadido el contacto
 
 def buscar_contacto(): # Función para buscar contactos
@@ -33,22 +66,14 @@ def eliminar_contacto(): # Función para eliminar contactos
 
     if nombre in agenda: # Comprueba si el nombre del contacto está en la agenda
         del agenda[nombre] # Elimina el contacto de la agenda
+        guardar_datos() # Llama a la función para guardar el cambio en el fichero (Ampliación)
         print("El contacto:",nombre, "se ha eliminado de la agenda.") # Imprime un mensaje de que se ha eliminado el contacto
     else: # Si el nombre del contacto no está en la agenda
         print("El contacto:",nombre, "no se encuentra en la agenda.") # Imprime un mensaje de que el contacto no se encuentra en la agenda
 
-# Diccionario con 10 párametros para el funcionamiento del programa
-agenda = { "Juan Pérez": 612458932,
-    "María García": 655321098,
-    "Carlos López": 642118743,
-    "Ana Martínez": 600342115,
-    "Luis Rodríguez": 622908431,
-    "Elena Sánchez": 687442309,
-    "Roberto Gómez": 633112254,
-    "Lucía Díaz": 699003421,
-    "Fernando Ruiz": 670554432,
-    "Sofía Hernández": 611887722
-}
+# Inicialización de la agenda (Ampliación: carga desde fichero)
+agenda = cargar_datos() # Carga los datos existentes al arrancar el programa
+
 while True: # Mantiene el bucle siempre activo hasta que se encuentre con un break
     borrar_pantalla() # Llama a la función para limpiar la terminal
 
