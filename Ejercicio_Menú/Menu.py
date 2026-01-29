@@ -5,6 +5,8 @@
 
 import os # Importamos la librería "os" para poder limpiar la terminal cada vez que reiniciamos el menú
 
+# Nuevas funciones de la ampliación
+# --------------------------------------------
 def cargar_datos(): # Función para cargar inicialmente los datos desde un fichero (Ampliación)
     agenda_aux = {} # Diccionario temporal para almacenar los contactos leídos
     
@@ -28,7 +30,7 @@ def guardar_datos(): # Función para que cualquier cambio de agregar o eliminar 
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "agenda.txt"), "w") as f: # Abre el fichero en modo escritura (sobrescribe con los datos actuales)
         for nombre, telefono in agenda.items(): # Recorre el diccionario de la agenda
             f.write(nombre + "," + telefono + "\n") # Escribe el nombre y teléfono separados por coma
-
+# --------------------------------------------
 
 def borrar_pantalla(): # Función para limpiar la pantalla tras cada opción
     os.system("clear") # Limpia la pantalla introduciendo el comando "clear" en el terminal
