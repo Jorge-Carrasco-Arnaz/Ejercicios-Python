@@ -124,5 +124,5 @@ while True: # Mantiene el bucle siempre activo hasta que se encuentre con un bre
             input("Pulsa Enter para reintentar ") # Pide al usuario pulsar Enter para continuar
 
 # Realizado por: Jorge Carrasco Arnaz
-# Fecha: 21/01/2026
-# Hora: 12:17
+# Fecha: 30/01/2026
+# Hora: 12:58
