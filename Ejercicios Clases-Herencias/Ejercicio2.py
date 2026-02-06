@@ -6,8 +6,8 @@
 # d. mostrar(): Muestra los datos de la persona.
 # e. esMayorDeEdad(): Devuelve un valor lógico indicando si es mayor de edad.
 
-# Entrada:
-# Salida: 
+# Entrada: Nombre y edad
+# Salida: Nombre y edad
 
 class Persona: # Definimos la clase Persona
     def __init__(self, nombre, edad): # Definimos el constructor
@@ -38,6 +38,8 @@ class Persona: # Definimos la clase Persona
         else: # Si la edad es mayor o igual a 18
             return "Es mayor de edad"
 
+
+print("\nPersona 1: \n") # Imprime encabezado
 p1=Persona("Jorge", 20) # Creamos el objeto p1
 print(f"Antes de su cumpleaños {p1.getNombre()} tiene {p1.getEdad()} años") # Imprime el nombre y la edad
 p1.setEdad(40) # Cambiamos la edad de p1
@@ -50,6 +52,7 @@ print(p1.esMayorDeEdad()) # Imprime si es mayor de edad
 
 print("\n") # Salto de linea
 
+print("Persona 2: \n") # Imprime encabezado
 p2=Persona("Paco", 15) # Creamos el objeto p2
 print(f"Antes de su cumpleaños {p2.getNombre()} tiene {p2.getEdad()} años") # Imprime el nombre y la edad
 p2.setEdad(16) # Cambiamos la edad de p2
@@ -62,6 +65,7 @@ print(p2.esMayorDeEdad()) # Imprime si es mayor de edad
 
 print("\n") # Salto de linea
 
+print("Persona 3: \n") # Imprime encabezado
 p3=Persona("Manolo", -2) # Creamos el objeto p3
 print(f"Antes de su cumpleaños {p3.getNombre()} tiene {p3.getEdad()} años") # Imprime el nombre y la edad
 p3.setEdad(-10) # Cambiamos la edad de p3
