@@ -28,14 +28,22 @@ def agregar_contacto(conn): # Funcion para insertar un nuevo contacto en la tabl
     borrar_pantalla() # Limpia la pantalla de la terminal
     print("=== AGREGAR CONTACTO ===") # Imprime el encabezado de la opcion
     nombre = input("Nombre: ") # Pide al usuario el nombre del nuevo contacto
-    telefono = input("Teléfono: ") # Pide al usuario el telefono del nuevo contacto
     
-    mi_cursor = conn.cursor() # Crea un cursor para la operacion SQL
-    sql = "INSERT INTO contactos (nombre, telefono) VALUES (%s, %s)" # Define la sentencia SQL de insercion
-    mi_cursor.execute(sql, (nombre, telefono)) # Ejecuta la insercion con los datos proporcionados
-    conn.commit() # Confirma los cambios de forma permanente en la base de datos
-    print(f"El contacto {nombre} se ha añadido correctamente.") # Imprime mensaje de éxito
-    input("Pulsa Enter para continuar...") # Pausa la ejecucion
+    mi_cursor = conn.cursor() # Crea un cursor para realizar las operaciones SQL
+    # Consulta para comprobar si el nombre ya existe en la base de datos
+    mi_cursor.execute("SELECT * FROM contactos WHERE nombre = %s", (nombre,)) # 
+    existe = mi_cursor.fetchone() # Intenta obtener el registro si existe
+    
+    if existe: # Comprueba si la consulta ha devuelto algun resultado
+        print(f"Error: El contacto '{nombre}' ya existe en la agenda.") # Imprime por pantalla el error
+    else: # Si el contacto no existe procede a pedir los demas datos
+        telefono = input("Teléfono: ") # Pide al usuario el telefono del nuevo contacto
+        sql = "INSERT INTO contactos (nombre, telefono) VALUES (%s, %s)" # Define la sentencia SQL de insercion
+        mi_cursor.execute(sql, (nombre, telefono)) # Ejecuta la insercion con los datos proporcionados
+        conn.commit() # Confirma los cambios de forma permanente en la base de datos
+        print(f"El contacto {nombre} se ha añadido correctamente.") # Informa del exito al usuario
+    
+    input("Pulsa Enter para continuar...") # Pausa la ejecucion para volver al menu principal
 
 def buscar_contacto(conn): # Funcion para buscar un contacto por su nombre
     borrar_pantalla() # Limpia la pantalla de la terminal
